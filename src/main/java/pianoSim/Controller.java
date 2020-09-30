@@ -41,6 +41,7 @@ public class Controller extends JPanel implements ActionListener {
         super.paint(g);
         for (int i = 0; i < 24; i++) {
             g.drawRect(buttons[i].getX(), buttons[i].getY(), 20, 50);
+            g.setColor(Color.black);
         }
     }
 
