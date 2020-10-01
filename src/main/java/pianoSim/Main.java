@@ -2,8 +2,14 @@ package pianoSim;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements KeyListener {
+
+    private static Sound a;
+
 
     private Main() {
         this.initUi();
@@ -17,6 +23,27 @@ public class Main extends JFrame {
         this.pack();
     }
 
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+
+        if (keyCode == KeyEvent.VK_Q) {
+            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
+            a.sound();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
+
     public static void main(String[] args) {
         EventQueue.invokeLater(
                 () -> {
@@ -26,3 +53,4 @@ public class Main extends JFrame {
         );
     }
 }
+

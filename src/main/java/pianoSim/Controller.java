@@ -6,11 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 public class Controller extends JPanel implements ActionListener {
 
-    //    private Player player;
     private Button[] buttons = new Button[24];
     private final int width = 547;
     private final int height = 191;
@@ -35,7 +35,7 @@ public class Controller extends JPanel implements ActionListener {
         URL url = getClass().getResource("/" + "keyBoard.jpg");
         ImageIcon ii = new ImageIcon(url);
         this.image = ii.getImage();
-        this.addKeyListener(new ReadKeyBoard());
+//        this.addKeyListener(new ReadKeys());
     }
 
     public void paintComponent(Graphics g) {
@@ -54,37 +54,13 @@ public class Controller extends JPanel implements ActionListener {
 
     }
 
-//    public synchronized void playSound(String name) throws MalformedURLException {
-
-//        try {
-//            stream = AudioSystem.getAudioInputStream(new File(name));
-//            clip = AudioSystem.getClip();
-//            clip.open(stream);
-//            clip.addLineListener(new LineListener() {
-//                @Override
-//                public void update(LineEvent lineEvent) {
-//                    if (lineEvent.getType() == LineEvent.Type.STOP) {
-//                        synchronized(clip) {
-//                            clip.notify();
-//                        }
-//                    }
-//                }
-//            });
-//            released = true;
-//        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException exc) {
-//            exc.printStackTrace();
-//            released = false;
-//        }
-
-//    }
-
     public void actionPerformed(ActionEvent actionEvent) {
-        boolean[] keys = ReadKeyBoard.getKeys();
-
-        if (keys[67]) {
-            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
-            a.sound();
-        }
+//        boolean[] keys = ReadKeyBoard.getKeys();
+//
+//        if (keys[67] || keys[KeyEvent.VK_C]) {
+//            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
+//            a.sound();
+//        }
     }
 }
 
