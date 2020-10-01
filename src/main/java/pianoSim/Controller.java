@@ -1,26 +1,28 @@
 package pianoSim;
 
-import javax.net.ssl.KeyManager;
-import javax.sound.midi.MidiChannel;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Synthesizer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.net.URL;
 
 public class Controller extends JPanel implements ActionListener {
 
-    private Player player;
+    //    private Player player;
     private Button[] buttons = new Button[24];
     private final int width = 547;
     private final int height = 191;
     private int x = 0;
     private int y = 20;
     private Image image;
+    private AudioInputStream stream = null;
+    private Clip clip = null;
+    private boolean released = false;
+    private static Sound a;
+
+
 
     public Controller() {
         this.i();
@@ -34,7 +36,6 @@ public class Controller extends JPanel implements ActionListener {
         ImageIcon ii = new ImageIcon(url);
         this.image = ii.getImage();
         this.addKeyListener(new ReadKeyBoard());
-        this.player = new Player();
     }
 
     public void paintComponent(Graphics g) {
@@ -50,25 +51,40 @@ public class Controller extends JPanel implements ActionListener {
     private void paintBoard(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
+
     }
+
+//    public synchronized void playSound(String name) throws MalformedURLException {
+
+//        try {
+//            stream = AudioSystem.getAudioInputStream(new File(name));
+//            clip = AudioSystem.getClip();
+//            clip.open(stream);
+//            clip.addLineListener(new LineListener() {
+//                @Override
+//                public void update(LineEvent lineEvent) {
+//                    if (lineEvent.getType() == LineEvent.Type.STOP) {
+//                        synchronized(clip) {
+//                            clip.notify();
+//                        }
+//                    }
+//                }
+//            });
+//            released = true;
+//        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException exc) {
+//            exc.printStackTrace();
+//            released = false;
+//        }
+
+//    }
 
     public void actionPerformed(ActionEvent actionEvent) {
         boolean[] keys = ReadKeyBoard.getKeys();
 
         if (keys[67]) {
-//            player.playSound(1, 10, 100, 72, 74); //player.playSound(1, 1000, 69, 72);
-            try {
-                Synthesizer synth = MidiSystem.getSynthesizer();
-                synth.open();
-                MidiChannel[] channels = synth.getChannels();
-                channels[0].programChange(1);
-                channels[0].noteOn(65, 80);
-                Thread.sleep(1000); // in milliseconds
-                channels[0].noteOff(65);
-                synth.close();
-            }  catch (Exception e) {
-                e.printStackTrace();
-            }
+            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
+            a.sound();
         }
     }
 }
+
