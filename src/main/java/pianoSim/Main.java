@@ -2,14 +2,8 @@ package pianoSim;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Main extends JFrame {
-
-    private static Sound a;
-
 
     private Main() {
         this.initUi();
@@ -21,6 +15,7 @@ public class Main extends JFrame {
         this.setTitle("pianoSim");
         this.setResizable(false);
         this.pack();
+        this.addKeyListener(new AddKeyAdapter());
     }
 
     public static void main(String[] args) {
