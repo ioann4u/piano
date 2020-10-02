@@ -35,7 +35,8 @@ public class Controller extends JPanel implements ActionListener {
         URL url = getClass().getResource("/" + "keyBoard.jpg");
         ImageIcon ii = new ImageIcon(url);
         this.image = ii.getImage();
-//        this.addKeyListener(new ReadKeys());
+
+        this.addKeyListener(new ReadKeys());
     }
 
     public void paintComponent(Graphics g) {
@@ -55,12 +56,14 @@ public class Controller extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-//        boolean[] keys = ReadKeyBoard.getKeys();
-//
-//        if (keys[67] || keys[KeyEvent.VK_C]) {
-//            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
-//            a.sound();
-//        }
+        ReadKeys readKeys = new ReadKeys();
+
+        boolean[] keys = readKeys.getKeys();
+
+        if (!keys[KeyEvent.VK_W]) {
+            a = new Sound("src/main/resources/39180__jobro__piano-ff-033.wav");
+            a.sound();
+        }
     }
 }
 
