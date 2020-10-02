@@ -23,6 +23,15 @@ public class Main extends JFrame implements KeyListener {
         this.pack();
     }
 
+//    JTextField textField = new JTextField(20);
+//
+//    textField.addKeyListener(new KeyAdapter() {
+//
+//        public void keyPressed(KeyEvent e) {
+//
+//        }
+//
+//    });
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
