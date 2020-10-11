@@ -6,40 +6,54 @@ import java.net.URL;
 
 public class Controller extends JPanel {
 
-    private Button[] buttons = new Button[24];
     private final int width = 547;
     private final int height = 191;
-//    private int x = 0;
-//    private int y = 20;
     private Image image;
+    AddKeyAdapter men = new AddKeyAdapter();
+    private boolean menu;
+
 
     public Controller() {
         this.i();
-        this.createButtons();
     }
 
     private void i() {
         this.setPreferredSize(new Dimension(this.width, this.height));
-        this.setBackground(Color.black);
         URL url = getClass().getResource("/" + "keyBoard.jpg");
         ImageIcon ii = new ImageIcon(url);
         this.image = ii.getImage();
+        this.menu = men.isMenu();
     }
 
     public void paintComponent(Graphics g) {
-        this.paintBoard(g);
-    }
-
-    private void createButtons() {
-        for (int i = 0; i < 24; i++) {
-            buttons[i] = new Button(i * 20, 10, i + 36);
-        }
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this);
+        if (!this.menu)
+            this.drawMenu(g);
+//        else if (!men.isMenu() && men.isGame())
+//            this.paintBoard(g);
+        Toolkit.getDefaultToolkit().sync();
     }
 
     private void paintBoard(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
+    }
 
+//    private void inMenu() {
+//        this.menu = men.isMenu();
+//    }
+
+    private void drawMenu(Graphics g) {
+        super.paintComponent(g);
+        String start = "Press Enter to play";
+
+        Font font = new Font("Helvetica", 1, 18);
+        FontMetrics fm = this.getFontMetrics(font);
+
+        g.setColor(Color.BLACK);
+        g.setFont(font);
+        g.drawString(start, (width - fm.stringWidth(start)) / 2, this.height / 2);
     }
 }
 

@@ -6,11 +6,21 @@ import java.awt.event.KeyEvent;
 public class AddKeyAdapter extends KeyAdapter {
 
     private static Sound a;
+    private boolean menu = true;
+    private boolean game = false;
+
 
     @Override
     public void keyPressed(KeyEvent e) {
-//        System.out.println(e.getKeyChar());
 
+        System.out.println(e.getKeyChar());
+        System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() == 10) {
+            this.menu = false;
+            this.game = true;
+        }
+        System.out.println(isMenu());
         if (e.getKeyChar() == 'c') {
             a = new Sound("src/main/resources/39175__jobro__piano-ff-028.wav");
             a.sound();
@@ -127,5 +137,13 @@ public class AddKeyAdapter extends KeyAdapter {
             a = new Sound("src/main/resources/39204__jobro__piano-ff-056.wav");
             a.sound();
         }
+    }
+
+    public boolean isMenu() {
+        return menu;
+    }
+
+    public boolean isGame() {
+        return game;
     }
 }
