@@ -27,11 +27,12 @@ public class Controller extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-        if (!this.menu)
+
+        if (men.isMenu())
             this.drawMenu(g);
-//        else if (!men.isMenu() && men.isGame())
+        else if (!men.isMenu())
 //            this.paintBoard(g);
+            g.drawImage(image, 0, 0, this);
         Toolkit.getDefaultToolkit().sync();
     }
 
